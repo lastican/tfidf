@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF-IDF Анализатор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .error-message {
+            color: #f44336;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TF-IDF Анализатор текста</h1>
+    
+    <div class="form-container">
+        <p>Загрузите текстовый файл для анализа и расчета частот терминов и обратных частот документов</p>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.file.id_for_label }}">Выберите текстовый файл (.txt):</label>
+                {{ form.file }}
+                {% if form.file.errors %}
+                    <div class="error-message">
+                        {{ form.file.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <button type="submit">Загрузить и проанализировать</button>
+        </form>
+    </div>
+</body>
+</html>
